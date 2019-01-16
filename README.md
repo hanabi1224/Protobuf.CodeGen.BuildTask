@@ -26,4 +26,4 @@ The generated files will be under obj/_ProtobufCodeGen folder, which will be git
 
 The unit test project [here](https://github.com/hanabi1224/Protobuf.CodeGen.BuildTask/tree/master/test/Protobuf.CodeGen.BuildTask.Tests) is a good example to demonstrate the usage of this package.
 
-As a side note, all the .proto files are also distributed together with the output dll as embedded resources, which can be inspected by tools like ILSpy.
+As a side note, all the .proto files are also distributed together with the output dll as embedded resources, which can be inspected by tools like [ILSpy](https://github.com/icsharpcode/ILSpy).
