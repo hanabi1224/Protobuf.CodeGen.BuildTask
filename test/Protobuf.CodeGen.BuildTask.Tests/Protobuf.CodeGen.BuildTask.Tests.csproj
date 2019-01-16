@@ -27,7 +27,7 @@
 
       <PropertyGroup>
         <ProtobufCodeGenTaskAssemblyPath>..\bin\$(Configuration)\netstandard2.0\Protobuf.CodeGen.BuildTask.dll</ProtobufCodeGenTaskAssemblyPath>
-        <NugetPackagesMachineRoot Condition=" '$(OS)' == 'Unix' ">~/.nuget/packages/</NugetPackagesMachineRoot>
+        <NugetPackagesMachineRoot Condition=" '$(OS)' == 'Unix' ">$(HOME)/.nuget/packages/</NugetPackagesMachineRoot>
         <NugetPackagesMachineRoot Condition=" '$(OS)' != 'Unix' ">$(userprofile)\.nuget\packages\</NugetPackagesMachineRoot>
       </PropertyGroup>
 
@@ -35,7 +35,7 @@
     <Otherwise>
 
       <ItemGroup>
-        <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.2-pre1">
+        <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.2-pre2">
           <PrivateAssets>All</PrivateAssets>
         </PackageReference>
       </ItemGroup>

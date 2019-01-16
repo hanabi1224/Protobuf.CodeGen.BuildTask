@@ -4,6 +4,11 @@ dotnet: 2.1.500
 os:
 - osx
 - linux
+#- windows
+env:
+  matrix:
+  - TestBuildPropsDirectly=true
+  - TestBuildPropsDirectly=false
 branches:
   only:
   - master
