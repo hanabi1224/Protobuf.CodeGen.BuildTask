@@ -5,7 +5,7 @@
 [![NuGet version](https://buildstats.info/nuget/Protobuf.CodeGen.BuildTask)](https://www.nuget.org/packages/Protobuf.CodeGen.BuildTask)
 ====
 
-MSBuild task that automatically uses protoc binary in [Google.Protobuf.Tools](https://www.nuget.org/packages/Google.Protobuf.Tools/) to generate c# files from .proto files. In order to build the generated c# files, it adds [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/) as indirect reference as well
+MSBuild task that automatically uses official protoc binary in [Google.Protobuf.Tools](https://www.nuget.org/packages/Google.Protobuf.Tools/) to generate c# files from .proto files. In order to build the generated c# files, it adds official [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/) as indirect reference to your project as well
 
 Install via [nuget](https://www.nuget.org/packages/Protobuf.CodeGen.BuildTask)
 
