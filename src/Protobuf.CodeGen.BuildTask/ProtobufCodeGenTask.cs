@@ -31,7 +31,7 @@ namespace Protobuf.CodeGen.BuildTask
         {
             if (!(FileNames?.Length > 0))
             {
-                return false;
+                return true;
             }
 
             var extendedProtoPath = new HashSet<string>(ProtoPaths, StringComparer.OrdinalIgnoreCase);
@@ -82,7 +82,9 @@ namespace Protobuf.CodeGen.BuildTask
                     Log.LogError(StdError);
                 }
 
-                return p.ExitCode == 0;
+                var success = p.ExitCode == 0;
+
+                return success;
             }
         }
     }
