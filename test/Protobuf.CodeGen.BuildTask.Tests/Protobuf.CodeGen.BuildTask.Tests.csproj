@@ -17,7 +17,7 @@
     </PackageReference>
   </ItemGroup>
 
-  <Target Name="PrintOS" BeforeTargets="Build">
+  <Target Name="PrintOS" BeforeTargets="ProtobufCodeGen">
     <Message Text="OS: $(OS)" Importance="high" />
   </Target>
 
