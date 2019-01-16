@@ -5,4 +5,20 @@
 [![NuGet version](https://buildstats.info/nuget/Protobuf.CodeGen.BuildTask)](https://www.nuget.org/packages/Protobuf.CodeGen.BuildTask)
 ====
 
-MSBuild task to automatically generate c# files from .proto files
+MSBuild task that automatically uses protoc binary in [Google.Protobuf.Tools](https://www.nuget.org/packages/Google.Protobuf.Tools/) to generate c# files from .proto files. In order to build the generated c# files, it adds [Google.Protobuf](https://www.nuget.org/packages/Google.Protobuf/) as indirect reference as well
+
+Install via [nuget](https://www.nuget.org/packages/Protobuf.CodeGen.BuildTask)
+
+or add below code snippet to your .csproj file
+
+```
+<ItemGroup>
+    <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.0" >
+        <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+</ItemGroup>
+```
+
+The generated files will be under _ProtobufCodeGen folder, which you can consider to [gitignore](https://github.com/hanabi1224/Protobuf.CodeGen.BuildTask/blob/master/test/Protobuf.CodeGen.BuildTask.Tests/.gitignore) it
+
+The unit test project [here](https://github.com/hanabi1224/Protobuf.CodeGen.BuildTask/tree/master/test/Protobuf.CodeGen.BuildTask.Tests) is a good example to demonstrate the usage.
