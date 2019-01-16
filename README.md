@@ -16,12 +16,12 @@ Windows, Linux, OSX are all supported and tested
 
 ```
 <ItemGroup>
-    <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.1" >
+    <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.2" >
         <PrivateAssets>All</PrivateAssets>
     </PackageReference>
 </ItemGroup>
 ```
 
-The generated files will be under _ProtobufCodeGen folder, which you can consider to [gitignore](https://github.com/hanabi1224/Protobuf.CodeGen.BuildTask/blob/master/test/Protobuf.CodeGen.BuildTask.Tests/.gitignore) it
+The generated files will be under obj/_ProtobufCodeGen folder, which will be gitignored by default.
 
-The unit test project [here](https://github.com/hanabi1224/Protobuf.CodeGen.BuildTask/tree/master/test/Protobuf.CodeGen.BuildTask.Tests) is a good example to demonstrate the usage.
+The unit test project [here](https://github.com/hanabi1224/Protobuf.CodeGen.BuildTask/tree/master/test/Protobuf.CodeGen.BuildTask.Tests) is a good example to demonstrate the usage of this package.
