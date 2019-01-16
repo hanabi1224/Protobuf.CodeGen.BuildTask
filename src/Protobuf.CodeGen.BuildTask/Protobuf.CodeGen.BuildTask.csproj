@@ -9,7 +9,7 @@
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageId>Protobuf.CodeGen.BuildTask</PackageId>
     <AssemblyName>$(PackageId)</AssemblyName>
-    <PackageVersion>0.1.1</PackageVersion>
+    <PackageVersion>0.1.2-pre1</PackageVersion>
     <Authors>hanabi1224</Authors>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>MSBuild task to automatically generate c# files from .proto files</Description>
