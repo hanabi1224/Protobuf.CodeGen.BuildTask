@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.1-pre1" >
+    <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.1-pre2" >
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
   </ItemGroup>

@@ -12,9 +12,11 @@ Install via [nuget](https://www.nuget.org/packages/Protobuf.CodeGen.BuildTask)
 
 or add below code snippet to your .csproj file
 
+Windows, Linux, OSX are all supported and tested
+
 ```
 <ItemGroup>
-    <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.0" >
+    <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.1" >
         <PrivateAssets>All</PrivateAssets>
     </PackageReference>
 </ItemGroup>
