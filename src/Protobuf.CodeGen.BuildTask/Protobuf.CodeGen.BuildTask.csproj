@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <PackageId>Protobuf.CodeGen.BuildTask</PackageId>
+    <AssemblyName>$(PackageId)</AssemblyName>
+    <PackageVersion>0.1.0-pre1</PackageVersion>
+    <Authors>hanabi1224</Authors>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>MSBuild task to automatically generate c# files from .proto files</Description>
+    <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/hanabi1224/Protobuf.CodeGen.BuildTask</PackageProjectUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>protobuf;proto;codegen;buildtask;</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="build\build.props">
+      <PackagePath>build\$(PackageId).props</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+    <Content Include="bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).dll">
+      <PackagePath>build\$(AssemblyName).dll</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.6.1" />
+    <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Build.Framework" Version="15.9.20">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Build.Utilities.Core" Version="15.9.20">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>

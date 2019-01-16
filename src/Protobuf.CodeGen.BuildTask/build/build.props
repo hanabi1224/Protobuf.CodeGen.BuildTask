@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <UsingTask
+    TaskName="ProtobufCodeGenTask"
+    AssemblyFile="$(MSBuildThisFileDirectory)Protobuf.CodeGen.BuildTask.dll" />
+
+  <Target Name="ProtobufCodeGen" BeforeTargets="AssignTargetPaths">
+    <ItemGroup>
+      <ProtoFilesToCompile Include="$(MSBuildProjectDirectory)/**/*.proto" />
+    </ItemGroup>
+    <PropertyGroup>
+      <ProtobufToolImportPath Condition="$(ProtobufToolImportPath) == ''">$(userprofile)\.nuget\packages\Google.Protobuf.Tools\3.6.1\tools\</ProtobufToolImportPath>
+      <ProtoCompilerToolPath Condition="$(ProtoCompilerToolPath) == ''">$(ProtobufToolImportPath)windows_x64\protoc</ProtoCompilerToolPath>
+      <ProtobufCodeGenFolder Condition="$(ProtobufCodeGenFolder) == ''">$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)\ProtobufCodeGen\'))</ProtobufCodeGenFolder>
+    </PropertyGroup>
+    <ProtobufCodeGenTask ProtoCompilerToolPath="$(ProtoCompilerToolPath)"
+                         OutputDir="$(ProtobufCodeGenFolder)"
+                         ProtoPaths="$(ProtobufToolImportPath)"
+                         FileNames="@(ProtoFilesToCompile)" />
+    <ItemGroup>
+      <Compile Include="$(ProtobufCodeGenFolder)/**/*.cs" />
+    </ItemGroup>
+    <CreateItem Include="@(ProtoFilesToCompile)">
+      <Output TaskParameter="Include" ItemName="EmbeddedResource"/>
+    </CreateItem>
+  </Target>
+  
+</Project>
