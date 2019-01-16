@@ -3,7 +3,6 @@ package tutorial;
 
 option csharp_namespace = "Google.Protobuf.Examples.Test";
 
-
 message Test {
   string name = 1;
 }

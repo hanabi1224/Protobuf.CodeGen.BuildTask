@@ -1,13 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
+  <PropertyGroup>
+    <ProtobufCodeGenTaskAssemblyPath Condition=" '$(ProtobufCodeGenTaskAssemblyPath)' == '' ">$(MSBuildThisFileDirectory)Protobuf.CodeGen.BuildTask.dll</ProtobufCodeGenTaskAssemblyPath>
+  </PropertyGroup>
+  
   <UsingTask
     TaskName="ProtobufCodeGenTask"
-    AssemblyFile="$(MSBuildThisFileDirectory)Protobuf.CodeGen.BuildTask.dll" />
+    AssemblyFile="$(ProtobufCodeGenTaskAssemblyPath)" />
 
   <UsingTask
     TaskName="GetProtobufCompilerOSSpecificFolderTask"
-    AssemblyFile="$(MSBuildThisFileDirectory)Protobuf.CodeGen.BuildTask.dll" />
+    AssemblyFile="$(ProtobufCodeGenTaskAssemblyPath)" />
 
   <Target Name="ProtobufCodeGen" BeforeTargets="AssignTargetPaths">
     <Message Text="OS: $(OS)" Importance="high" />
@@ -19,9 +23,10 @@
       <ProtoFilesToCompile Include="$(MSBuildProjectDirectory)/**/*.proto" />
     </ItemGroup>
     <PropertyGroup>
-      <ProtobufCodeGenOutputDir Condition="$(ProtobufCodeGenOutputDir) == ''">$(MSBuildProjectDirectory)/obj/</ProtobufCodeGenOutputDir>
-      <ProtobufToolImportPath Condition="$(ProtobufToolImportPath) == ''">$(MSBuildThisFileDirectory)../../../google.protobuf.tools/3.6.1/tools/</ProtobufToolImportPath>
-      <ProtoCompilerToolPath Condition="$(ProtoCompilerToolPath) == ''">$(ProtobufToolImportPath)$(ProtobufToolFolderName)/protoc</ProtoCompilerToolPath>
+      <ProtobufCodeGenOutputDir Condition=" '$(ProtobufCodeGenOutputDir)' == '' ">$(MSBuildProjectDirectory)/obj/</ProtobufCodeGenOutputDir>
+      <NugetPackagesMachineRoot Condition=" '$(NugetPackagesMachineRoot)' == '' ">$(MSBuildThisFileDirectory)../../../</NugetPackagesMachineRoot>
+      <ProtobufToolImportPath Condition=" '$(ProtobufToolImportPath)' == '' ">$(NugetPackagesMachineRoot)google.protobuf.tools/3.6.1/tools/</ProtobufToolImportPath>
+      <ProtoCompilerToolPath Condition=" '$(ProtoCompilerToolPath)' == '' ">$(ProtobufToolImportPath)$(ProtobufToolFolderName)/protoc</ProtoCompilerToolPath>
       <ProtobufCodeGenFolder>$(ProtobufCodeGenOutputDir)_ProtobufCodeGen</ProtobufCodeGenFolder>
     </PropertyGroup>
     <ProtobufCodeGenTask ProtoCompilerToolPath="$(ProtoCompilerToolPath)"
