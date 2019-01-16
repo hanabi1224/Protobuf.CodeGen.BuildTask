@@ -8,18 +8,16 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "miscs", "miscs", "{ABFFC9D7-281E-47D8-B6A4-0F3AB690448F}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		.travis.yml = .travis.yml
 		appveyor.yml = appveyor.yml
 		codecov.yml = codecov.yml
 		LICENSE = LICENSE
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.CodeGen.BuildTask.Tests", "test\Protobuf.CodeGen.BuildTask.Tests\Protobuf.CodeGen.BuildTask.Tests.csproj", "{D4CE589E-099B-4D5A-B00D-1CE3EEF215BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Protobuf.CodeGen.BuildTask.Tests", "test\Protobuf.CodeGen.BuildTask.Tests\Protobuf.CodeGen.BuildTask.Tests.csproj", "{D4CE589E-099B-4D5A-B00D-1CE3EEF215BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{42CAEAC1-138B-4C29-B490-22138AA314E6}"
-	ProjectSection(SolutionItems) = preProject
-		test\Directory.Build.targets = test\Directory.Build.targets
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
