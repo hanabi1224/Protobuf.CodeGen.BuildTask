@@ -14,9 +14,8 @@
       <ProtobufToolOS Condition="$(ProtobufToolOS)=='' and $(OS.Contains('OSX'))">macosx</ProtobufToolOS>
       <ProtobufToolOS Condition="$(ProtobufToolOS)=='' and $(OS.Contains('Unix'))">linux</ProtobufToolOS>
       <ProtobufToolArchitect Condition="$(ProtobufToolArchitect) == ''">x64</ProtobufToolArchitect>
-      <ProtobufToolImportPath Condition="$(ProtobufToolImportPath) == ''">$(userprofile)\.nuget\packages\Google.Protobuf.Tools\3.6.1\tools\</ProtobufToolImportPath>
-      <ProtoCompilerToolPath Condition="$(ProtoCompilerToolPath) == ''">$(ProtobufToolImportPath)$(ProtobufToolOS)_$(ProtobufToolArchitect)\protoc</ProtoCompilerToolPath>
-      <!--<ProtobufCodeGenFolder Condition="$(ProtobufCodeGenFolder) == ''">$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '$(IntermediateOutputPath)..\ProtobufCodeGen\'))</ProtobufCodeGenFolder>-->
+      <ProtobufToolImportPath Condition="$(ProtobufToolImportPath) == ''">$(MSBuildThisFileDirectory)../../../google.protobuf.tools/3.6.1/tools/</ProtobufToolImportPath>
+      <ProtoCompilerToolPath Condition="$(ProtoCompilerToolPath) == ''">$(ProtobufToolImportPath)$(ProtobufToolOS)_$(ProtobufToolArchitect)/protoc</ProtoCompilerToolPath>
       <ProtobufCodeGenFolder Condition="$(ProtobufCodeGenFolder) == ''">$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '_ProtobufCodeGen'))</ProtobufCodeGenFolder>
     </PropertyGroup>
     <ProtobufCodeGenTask ProtoCompilerToolPath="$(ProtoCompilerToolPath)"

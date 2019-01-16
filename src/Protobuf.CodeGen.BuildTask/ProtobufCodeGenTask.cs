@@ -58,6 +58,8 @@ namespace Protobuf.CodeGen.BuildTask
                 Directory.CreateDirectory(OutputDir);
             }
 
+            Log.LogMessage(MessageImportance.High, $"{ProtoCompilerToolPath} {argumentsBuilder.ToString()}");
+
             using (var p = Process.Start(new ProcessStartInfo
             {
                 FileName = ProtoCompilerToolPath,
@@ -74,7 +76,7 @@ namespace Protobuf.CodeGen.BuildTask
 
                 if (!string.IsNullOrEmpty(StdOut))
                 {
-                    Log.LogError(StdOut);
+                    Log.LogMessage(MessageImportance.High, StdOut);
                 }
 
                 if (!string.IsNullOrEmpty(StdError))
