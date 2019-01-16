@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Microsoft.Build.Framework;
 
@@ -37,13 +38,15 @@ namespace Protobuf.CodeGen.BuildTask
             }
 
             var extendedProtoPath = new HashSet<string>(ProtoPaths, StringComparer.OrdinalIgnoreCase);
-            foreach (var file in FileNames)
+            foreach (var dir in FileNames
+                .Select(_ => Path.GetDirectoryName(_)))
             {
-                extendedProtoPath.Add(Path.GetDirectoryName(file));
+                extendedProtoPath.Add(dir);
             }
 
             var argumentsBuilder = new StringBuilder();
-            foreach (var path in extendedProtoPath)
+            foreach (var path in extendedProtoPath
+                .OrderBy(_ => _))
             {
                 argumentsBuilder.Append($" -I {path}");
             }
@@ -55,7 +58,8 @@ namespace Protobuf.CodeGen.BuildTask
 
             argumentsBuilder.Append($" --csharp_out={OutputDir}");
 
-            foreach (var file in FileNames)
+            foreach (var file in FileNames
+                .OrderBy(_ => _))
             {
                 argumentsBuilder.Append($" {file}");
             }
@@ -65,7 +69,8 @@ namespace Protobuf.CodeGen.BuildTask
                 Directory.CreateDirectory(OutputDir);
             }
 
-            Log.LogMessage(MessageImportance.High, $"{ProtoCompilerToolPath} {argumentsBuilder.ToString()}");
+            var command = $"{ProtoCompilerToolPath} {argumentsBuilder.ToString()}";
+            Log.LogMessage(MessageImportance.High, command);
 
             using (var p = Process.Start(new ProcessStartInfo
             {
@@ -92,7 +97,6 @@ namespace Protobuf.CodeGen.BuildTask
                 }
 
                 var success = p.ExitCode == 0;
-
                 return success;
             }
         }

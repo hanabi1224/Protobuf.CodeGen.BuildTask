@@ -8,7 +8,7 @@
   <UsingTask
     TaskName="GetProtobufCompilerOSSpecificFolderTask"
     AssemblyFile="$(MSBuildThisFileDirectory)Protobuf.CodeGen.BuildTask.dll" />
-  
+
   <Target Name="ProtobufCodeGen" BeforeTargets="AssignTargetPaths">
     <Message Text="OS: $(OS)" Importance="high" />
     <GetProtobufCompilerOSSpecificFolderTask>
@@ -17,23 +17,43 @@
     <Message Text="ProtobufToolFolderName: $(ProtobufToolFolderName)" Importance="high" />
     <ItemGroup>
       <ProtoFilesToCompile Include="$(MSBuildProjectDirectory)/**/*.proto" />
-    </ItemGroup>    
+    </ItemGroup>
     <PropertyGroup>
+      <ProtobufCodeGenOutputDir Condition="$(ProtobufCodeGenOutputDir) == ''">$(MSBuildProjectDirectory)/obj/</ProtobufCodeGenOutputDir>
       <ProtobufToolImportPath Condition="$(ProtobufToolImportPath) == ''">$(MSBuildThisFileDirectory)../../../google.protobuf.tools/3.6.1/tools/</ProtobufToolImportPath>
       <ProtoCompilerToolPath Condition="$(ProtoCompilerToolPath) == ''">$(ProtobufToolImportPath)$(ProtobufToolFolderName)/protoc</ProtoCompilerToolPath>
-      <ProtobufCodeGenFolder Condition="$(ProtobufCodeGenFolder) == ''">$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '_ProtobufCodeGen'))</ProtobufCodeGenFolder>
+      <ProtobufCodeGenFolder>$(ProtobufCodeGenOutputDir)_ProtobufCodeGen</ProtobufCodeGenFolder>
     </PropertyGroup>
     <ProtobufCodeGenTask ProtoCompilerToolPath="$(ProtoCompilerToolPath)"
                          OutputDir="$(ProtobufCodeGenFolder)"
                          ProtoPaths="$(ProtobufToolImportPath)"
                          FileNames="@(ProtoFilesToCompile)" />
     <ItemGroup>
-      <Compile Remove="$(ProtobufCodeGenFolder)/**/*.cs" />
-      <Compile Include="$(ProtobufCodeGenFolder)/**/*.cs" />
+      <None Remove="@(ProtoFilesToCompile)" />
+      <EmbeddedResource Include="@(ProtoFilesToCompile)" />
     </ItemGroup>
-    <CreateItem Include="@(ProtoFilesToCompile)">
-      <Output TaskParameter="Include" ItemName="EmbeddedResource"/>
-    </CreateItem>
   </Target>
-  
+
+  <Target Name="GetProtobufGeneratedCsharpFilesAsCompileItems"
+    DependsOnTargets="ProtobufCodeGen;"
+    BeforeTargets="BeforeCompile">
+    <ItemGroup>
+      <Compile Include="$(ProtobufCodeGenFolder)/**/*.cs"/>
+    </ItemGroup>
+  </Target>
+
+  <Target Name="CleanProtobufCodeGenItems"
+            BeforeTargets="CoreClean">
+    <PropertyGroup>
+      <ProtobufCodeGenOutputDir Condition="$(ProtobufCodeGenOutputDir) == ''">$(MSBuildProjectDirectory)/obj/</ProtobufCodeGenOutputDir>
+      <ProtobufCodeGenFolder>$(ProtobufCodeGenOutputDir)_ProtobufCodeGen</ProtobufCodeGenFolder>
+    </PropertyGroup>
+    <ItemGroup>
+      <ProtobufGeneratedFilesToDelete Include="$(ProtobufCodeGenFolder)/**/*" />
+    </ItemGroup>
+    <Message Text="ProtobufCodeGenFolder: $(ProtobufCodeGenFolder)" Importance="high" />
+    <Message Text="ProtobufGeneratedFilesToDelete: @(ProtobufGeneratedFilesToDelete)" Importance="high" />
+    <Delete Files="@(ProtobufGeneratedFilesToDelete)"/>
+  </Target>
+
 </Project>
