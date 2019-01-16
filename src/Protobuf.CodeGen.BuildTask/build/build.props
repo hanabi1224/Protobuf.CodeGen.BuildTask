@@ -28,6 +28,7 @@
                          ProtoPaths="$(ProtobufToolImportPath)"
                          FileNames="@(ProtoFilesToCompile)" />
     <ItemGroup>
+      <Compile Remove="$(ProtobufCodeGenFolder)/**/*.cs" />
       <Compile Include="$(ProtobufCodeGenFolder)/**/*.cs" />
     </ItemGroup>
     <CreateItem Include="@(ProtoFilesToCompile)">
