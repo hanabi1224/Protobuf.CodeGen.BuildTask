@@ -8,13 +8,41 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="NUnit" Version="3.11.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.12.0" />
-    <PackageReference Include="FluentAssertions" Version="5.6.0" />    
+    <PackageReference Include="FluentAssertions" Version="5.6.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.1-pre2" >
-      <PrivateAssets>All</PrivateAssets>
-    </PackageReference>
-  </ItemGroup>
+  <Choose>
+    <When Condition="'$(TestBuildPropsDirectly)' == 'true'">
+
+      <ItemGroup>
+        <ProjectReference Include="..\..\src\Protobuf.CodeGen.BuildTask\Protobuf.CodeGen.BuildTask.csproj">
+          <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+        </ProjectReference>
+      </ItemGroup>
+
+      <ItemGroup>
+        <PackageReference Include="Google.Protobuf" Version="3.6.1" />
+        <PackageReference Include="Google.Protobuf.Tools" Version="3.6.1" />
+      </ItemGroup>
+
+      <PropertyGroup>
+        <ProtobufCodeGenTaskAssemblyPath>..\bin\$(Configuration)\netstandard2.0\Protobuf.CodeGen.BuildTask.dll</ProtobufCodeGenTaskAssemblyPath>
+        <NugetPackagesMachineRoot Condition=" '$(OS)' == 'Unix' ">~/.nuget/packages/</NugetPackagesMachineRoot>
+        <NugetPackagesMachineRoot Condition=" '$(OS)' != 'Unix' ">$(userprofile)\.nuget\packages\</NugetPackagesMachineRoot>
+      </PropertyGroup>
+
+    </When>
+    <Otherwise>
+
+      <ItemGroup>
+        <PackageReference Include="Protobuf.CodeGen.BuildTask" Version="0.1.2-pre1">
+          <PrivateAssets>All</PrivateAssets>
+        </PackageReference>
+      </ItemGroup>
+
+    </Otherwise>
+  </Choose>
+
+  <Import Project="..\..\src\Protobuf.CodeGen.BuildTask\build\build.props" Condition="'$(TestBuildPropsDirectly)' == 'true'" />
 
 </Project>
