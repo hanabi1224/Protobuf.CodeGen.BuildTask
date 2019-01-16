@@ -21,6 +21,8 @@ namespace Protobuf.CodeGen.BuildTask
         [Required]
         public string OutputDir { get; set; }
 
+        public string BuildOptions { get; set; } = "file_extension=.g.cs";
+
         [Output]
         public string StdOut { get; set; }
 
@@ -44,6 +46,11 @@ namespace Protobuf.CodeGen.BuildTask
             foreach (var path in extendedProtoPath)
             {
                 argumentsBuilder.Append($" -I {path}");
+            }
+
+            if (!string.IsNullOrEmpty(BuildOptions))
+            {
+                argumentsBuilder.Append($" --csharp_opt={BuildOptions}");
             }
 
             argumentsBuilder.Append($" --csharp_out={OutputDir}");

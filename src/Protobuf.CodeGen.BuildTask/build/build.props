@@ -5,17 +5,22 @@
     TaskName="ProtobufCodeGenTask"
     AssemblyFile="$(MSBuildThisFileDirectory)Protobuf.CodeGen.BuildTask.dll" />
 
+  <UsingTask
+    TaskName="GetProtobufCompilerOSSpecificFolderTask"
+    AssemblyFile="$(MSBuildThisFileDirectory)Protobuf.CodeGen.BuildTask.dll" />
+  
   <Target Name="ProtobufCodeGen" BeforeTargets="AssignTargetPaths">
+    <Message Text="OS: $(OS)" Importance="high" />
+    <GetProtobufCompilerOSSpecificFolderTask>
+      <Output TaskParameter="FolderName" PropertyName="ProtobufToolFolderName"/>
+    </GetProtobufCompilerOSSpecificFolderTask>
+    <Message Text="ProtobufToolFolderName: $(ProtobufToolFolderName)" Importance="high" />
     <ItemGroup>
       <ProtoFilesToCompile Include="$(MSBuildProjectDirectory)/**/*.proto" />
-    </ItemGroup>
+    </ItemGroup>    
     <PropertyGroup>
-      <ProtobufToolOS Condition="$(ProtobufToolOS)=='' and $(OS.Contains('Windows'))">windows</ProtobufToolOS>      
-      <ProtobufToolOS Condition="$(ProtobufToolOS)=='' and $(OS.Contains('OSX'))">macosx</ProtobufToolOS>
-      <ProtobufToolOS Condition="$(ProtobufToolOS)=='' and $(OS.Contains('Unix'))">linux</ProtobufToolOS>
-      <ProtobufToolArchitect Condition="$(ProtobufToolArchitect) == ''">x64</ProtobufToolArchitect>
       <ProtobufToolImportPath Condition="$(ProtobufToolImportPath) == ''">$(MSBuildThisFileDirectory)../../../google.protobuf.tools/3.6.1/tools/</ProtobufToolImportPath>
-      <ProtoCompilerToolPath Condition="$(ProtoCompilerToolPath) == ''">$(ProtobufToolImportPath)$(ProtobufToolOS)_$(ProtobufToolArchitect)/protoc</ProtoCompilerToolPath>
+      <ProtoCompilerToolPath Condition="$(ProtoCompilerToolPath) == ''">$(ProtobufToolImportPath)$(ProtobufToolFolderName)/protoc</ProtoCompilerToolPath>
       <ProtobufCodeGenFolder Condition="$(ProtobufCodeGenFolder) == ''">$([System.IO.Path]::Combine('$(MSBuildProjectDirectory)', '_ProtobufCodeGen'))</ProtobufCodeGenFolder>
     </PropertyGroup>
     <ProtobufCodeGenTask ProtoCompilerToolPath="$(ProtoCompilerToolPath)"
@@ -23,6 +28,7 @@
                          ProtoPaths="$(ProtobufToolImportPath)"
                          FileNames="@(ProtoFilesToCompile)" />
     <ItemGroup>
+      <Compile Remove="$(ProtobufCodeGenFolder)/**/*.cs" />
       <Compile Include="$(ProtobufCodeGenFolder)/**/*.cs" />
     </ItemGroup>
     <CreateItem Include="@(ProtoFilesToCompile)">
