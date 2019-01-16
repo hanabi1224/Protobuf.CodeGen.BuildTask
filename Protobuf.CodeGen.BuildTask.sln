@@ -14,6 +14,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "miscs", "miscs", "{ABFFC9D7
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.CodeGen.BuildTask.Tests", "test\Protobuf.CodeGen.BuildTask.Tests\Protobuf.CodeGen.BuildTask.Tests.csproj", "{D4CE589E-099B-4D5A-B00D-1CE3EEF215BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{42CAEAC1-138B-4C29-B490-22138AA314E6}"
+	ProjectSection(SolutionItems) = preProject
+		test\Directory.Build.targets = test\Directory.Build.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,9 +31,16 @@ Global
 		{5E1390BD-A85D-441C-A518-FB97D3DC317F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E1390BD-A85D-441C-A518-FB97D3DC317F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E1390BD-A85D-441C-A518-FB97D3DC317F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4CE589E-099B-4D5A-B00D-1CE3EEF215BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4CE589E-099B-4D5A-B00D-1CE3EEF215BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4CE589E-099B-4D5A-B00D-1CE3EEF215BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4CE589E-099B-4D5A-B00D-1CE3EEF215BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D4CE589E-099B-4D5A-B00D-1CE3EEF215BD} = {42CAEAC1-138B-4C29-B490-22138AA314E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {547BA788-70C2-49A0-B15C-2A70374FC667}
