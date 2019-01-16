@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <Target Name="PrintOS" BeforeTargets="Build">
+    <Message Text="OS: $(OS)" Importance="high" />
+  </Target>
+
 </Project>

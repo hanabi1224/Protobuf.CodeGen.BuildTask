@@ -6,6 +6,7 @@
     AssemblyFile="$(MSBuildThisFileDirectory)Protobuf.CodeGen.BuildTask.dll" />
 
   <Target Name="ProtobufCodeGen" BeforeTargets="AssignTargetPaths">
+    <Message Text="OS: $(OS)" Importance="high" />
     <ItemGroup>
       <ProtoFilesToCompile Include="$(MSBuildProjectDirectory)/**/*.proto" />
     </ItemGroup>
